@@ -10,3 +10,35 @@ A lightweight, production-ready, and highly optimized self-hosted infrastructure
 ## Architecture Overview
 
 The system architecture seamlessly integrates networking, containerization, local storage preservation, and active system auditing to operate reliably under strict hardware limitations (512MB RAM).
+
+                  +---------------------------------------+
+                  |               Tailscale               |
+                  |        (Secure Remote Access)         |
+                  +-------------------+-------------------+
+                                      |
+                                      v
+
++------------------+         +------------+------------+         +------------------+
+|  Client Devices  +-------->|         Pi-hole         +-------->|     Unbound      |
+|  (Local/Remote)  |   DNS   |  (Network Ad-blocker)   |   DNS   | (Recursive DNS)  |
++------------------+         +------------+------------+         +--------+---------+
+|                               |
+v                               v
++------------+------------+         +--------+---------+
+|       Vaultwarden       |         |   Root DNS Servers|
+| (Docker Bitwarden API)  |         +------------------+
++------------+------------+
+|
+Logs  | (systemd-journald)
+v
++------------+------------+
+|        Fail2ban         |
+|   (Intrusion Defense)   |
++------------+------------+
+|
+Trigger Action| (iptables + curl)
+v
++------------+------------+
+|   Telegram Alert Bot    |
+|  (Instant Notification) |
++-------------------------+
