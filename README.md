@@ -10,8 +10,7 @@ A lightweight, production-ready, and highly optimized self-hosted infrastructure
 ## Architecture Overview
 
 The system architecture seamlessly integrates networking, containerization, local storage preservation, and active system auditing to operate reliably under strict hardware limitations (512MB RAM).
-
-                  +---------------------------------------+
++---------------------------------------+
                   |               Tailscale               |
                   |        (Secure Remote Access)         |
                   +-------------------+-------------------+
